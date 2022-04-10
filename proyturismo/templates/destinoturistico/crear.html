@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+lista de destinos turisticos
+{% endblock %}
+
+{% block contenido %}
+contenido del destino turistico
+<div class="card text-start|center|end">
+  <img class="card-img-top" src="holder.js/100px180/" alt="">
+  <div class="card-body">
+    <h4 class="card-title">datos del sitio turistico</h4>
+    {% include 'destinoturistico/form.html' %} </div>
+</div>
+
+
+
+{% endblock %}

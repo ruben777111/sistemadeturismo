@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+lista de destinos turisticos
+{% endblock %}
+
+{% block contenido %}
+contenido del destino turistico
+<p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Agregar nuevo destino turistico</a> </p> 
+
+<table class="table table-striped table-dark">
+    <thead>
+        {% for dest in destino %}
+      <tr>
+        <th >{{ dest.iddestino }}</th>
+        <th >{{ dest.nomdestino }}</th>
+
+        <th>
+          <img src="{{ dest.multimedia.url }}" height="50">
+          </th>
+
+
+        <th>{{ dest.preciodestino }}</th>
+        <td><a href="{% url 'editardestinoturistico' %}" class="btn btn-success" role="button"">Editar</a> 
+            <a href="http://www.ibermega.com" class="btn btn-danger" role="button"">Borrar</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
