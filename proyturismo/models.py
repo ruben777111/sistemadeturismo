@@ -21,15 +21,38 @@ class Destinoturistico(models.Model):
         db_table = 'destinoTuristico'
         
         
-class cliente(models.Model):
-    ci = models.IntegerField(primary_key=True, max_length=10)
-    nombre = models.CharField(max_length=20)
-    ap_pa = models.CharField(max_length=20)
-    ap_ma = models.CharField(max_length=20)
-    edad = models.IntegerField()
-    direccion = models.CharField(max_length=30)
-    celular = models.IntegerField()
+class Cliente(models.Model):
+    idcliente = models.IntegerField(primary_key=True)
+    nombrecliente = models.CharField(max_length=20, null=True)
+    apellidoscliente = models.CharField(max_length=40, null=True)
+    edadcliente = models.IntegerField(null=True)
+    direccioncliente = models.CharField(max_length=30, null=True)
+    celularcliente = models.IntegerField(null=True)
     
     class Meta:
-        db_table = 'cliente'
-        
+        db_table = 'Cliente'
+        ordering = ['idcliente']
+
+class Transporte(models.Model):
+    idtransporte = models.IntegerField(primary_key=True)
+    tipotransporte = models.CharField(max_length=20)
+    preciotransporte = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    descripciontransporte = models.CharField(max_length=50)
+    
+    class Meta:
+        db_table = 'Transportes'
+        ordering = ['idtransporte']
+class Boleto(models.Model):
+    idboleto = models.IntegerField(primary_key=True)
+    idcliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    iddestino = models.ForeignKey(Destinoturistico, on_delete=models.CASCADE)
+    idtransporte = models.ForeignKey(Transporte, on_delete=models.CASCADE)
+    fechaviaje = models.DateTimeField(auto_now_add=False)
+    fechaemision = models.DateTimeField(auto_now=False)
+    tipopago = models.CharField(max_length=20)
+    cantidad = models.IntegerField()
+    preciototal = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
+    
+    class Meta:
+        db_table = 'Boleto'
+        ordering = ['idboleto']
