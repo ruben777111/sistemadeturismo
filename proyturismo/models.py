@@ -17,3 +17,19 @@ class Destinoturistico(models.Model):
     def delete(self,using=None, keep_parents=False):
         self.multimedia.storage.delete(self.multimedia.name)
         super().delete()
+    class Meta:
+        db_table = 'destinoTuristico'
+        
+        
+class cliente(models.Model):
+    ci = models.IntegerField(primary_key=True, max_length=10)
+    nombre = models.CharField(max_length=20)
+    ap_pa = models.CharField(max_length=20)
+    ap_ma = models.CharField(max_length=20)
+    edad = models.IntegerField()
+    direccion = models.CharField(max_length=30)
+    celular = models.IntegerField()
+    
+    class Meta:
+        db_table = 'cliente'
+        
