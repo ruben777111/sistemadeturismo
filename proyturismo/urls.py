@@ -3,6 +3,7 @@ from . import views
 
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
+from proyturismo.views import transporte, clientes
 
 urlpatterns=[
     path('',views.login,name='login'),
@@ -16,8 +17,11 @@ urlpatterns=[
 
     path('boleto',views.boleto,name='boleto'),
     
+    # Cliente
+    path('cliente/', clientes.as_view(), name='cliente'),
     
-    path('cliente/', views.clientes, name='cliente')
+    # Transporte
+    path('transporte/', transporte.as_view(), name='transporte' ),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,19 +1,41 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-lista de destinos turisticos
+{{pestaña}}
 {% endblock %}
 
 {% block contenido %}
-<h1> {{titulo}} </h1>
-<p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Agregar CLiente
-        turistico</a> </p>
 
-<table class="table table-striped table-dark">
-    <thead>
-        {% for cliente in clientes %}
-        {{listado}}
-        {% endfor %}
+<div class="container mt-3">
+    <h2>{{titulo}}</h2>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+                <th>Celular</th>
+                <th colspan="2">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for cliente in object_list %}
+            <tr>
+                <td>{{ cliente.nombrecliente }}</td>
+                <td>{{ cliente.apellidoscliente }}</td>
+                <td>{{ cliente.edadcliente }}</td>
+                <td>{{ cliente.direccioncliente }}</td>
+                <td>{{ cliente.celularcliente }}</td>
+                <td><a href="">Editar</a></td>
+                <td><a href="">Eliminar</a></td>
+
+            </tr>
+
+            {% endfor %}
+
         </tbody>
-</table>
+    </table>
+</div>
 {% endblock %}

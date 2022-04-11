@@ -1,6 +1,8 @@
+from django.views.generic import ListView
+from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Cliente, Destinoturistico
+from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
 def inicio(request):
@@ -31,14 +33,19 @@ def boleto(request):
 
 
 """vista para cliente"""
-def clientes(request):
-    datos = {
-        'titulo' : 'Listado Clientes',
-        'clientes' : Cliente.objects.all(),        
-    }
+class clientes(ListView):
+    model = Cliente
+    template_name = 'cliente/index.html'
+
+
+def eliminarcliente(request):
+    ...
     
-    return render(request, 'cliente/index.html', datos)
 
 
 
 """vista para transporte"""
+
+class transporte(ListView):
+    model = Transporte
+    template_name = 'transporte/index.html'
