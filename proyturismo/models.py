@@ -20,7 +20,6 @@ class Destinoturistico(models.Model):
     class Meta:
         db_table = 'destinoTuristico'
         
-        
 class Cliente(models.Model):
     idcliente = models.IntegerField(primary_key=True)
     nombrecliente = models.CharField(max_length=20, null=True)
