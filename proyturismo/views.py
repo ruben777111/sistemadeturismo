@@ -36,11 +36,12 @@ def boleto(request):
 class clientes(ListView):
     model = Cliente
     template_name = 'cliente/index.html'
-
-
-def eliminarcliente(request):
-    ...
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Listado de Clientes'
+        context['pestaña'] = 'Listado de Clientes'
+        return context
 
 
 
@@ -49,3 +50,9 @@ def eliminarcliente(request):
 class transporte(ListView):
     model = Transporte
     template_name = 'transporte/index.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Listado de Transportes'
+        context['pestaña'] = 'Listado de Transportes'
+        return context
