@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Destinoturistico
+from .models import Cliente, Destinoturistico
 
 # Create your views here.
 def inicio(request):
@@ -31,6 +31,13 @@ def boleto(request):
 
 
 """vista para cliente"""
+def clientes(request):
+    datos = {
+        'titulo' : 'Listado Clientes',
+        'clientes' : Cliente.objects.all(),        
+    }
+    
+    return render(request, 'cliente/index.html', datos)
 
 
 

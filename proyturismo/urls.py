@@ -15,6 +15,9 @@ urlpatterns=[
     
 
     path('boleto',views.boleto,name='boleto'),
+    
+    
+    path('cliente/', views.clientes, name='cliente')
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

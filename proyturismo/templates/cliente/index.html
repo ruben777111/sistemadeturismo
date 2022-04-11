@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+lista de destinos turisticos
+{% endblock %}
+
+{% block contenido %}
+<h1> {{titulo}} </h1>
+<p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Agregar CLiente
+        turistico</a> </p>
+
+<table class="table table-striped table-dark">
+    <thead>
+        {% for cliente in clientes %}
+        {{listado}}
+        {% endfor %}
+        </tbody>
+</table>
+{% endblock %}
