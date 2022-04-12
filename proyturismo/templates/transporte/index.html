@@ -24,8 +24,8 @@
                 <td>{{ transporte.tipotransporte }}</td>
                 <td>{{ transporte.preciotransporte }}</td>
                 <td>{{ transporte.descripciontransporte }}</td>
-                <td><a href="">Editar</a></td>
-                <td><a href="">Eliminar</a></td>
+                <td><a href=" {% url 'editartransporte' transporte.idtransporte %} ">Editar</a></td>
+                <td><a href=" {% url 'eliminartransporte' transporte.idtransporte %}">Eliminar</a></td>
 
             </tr>
 
@@ -34,5 +34,5 @@
         </tbody>
     </table>
 </div>
-<a href="" class="btn btn-primary" role="button">Nuevo Transporte</a>
+<a href=" {% url 'creartransporte' %} " class="btn btn-primary" role="button">Nuevo Transporte</a>
 {% endblock %}

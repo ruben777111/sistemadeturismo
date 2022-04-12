@@ -15,17 +15,16 @@
         </div>
         <div class="card-body">
             {% csrf_token %}
-            {% for field in form.visible_fields %}
-            <div class="mb-3 mt-3">
-                <label for="email"> {{field.label}} </label>
-                {{field}}
+            <div class="alert alert-danger">
+                <strong>Eliminar Registro</strong> <br>
+                Estas seguro de eliminar el registro nro: {{object.idtransporte}}
             </div>
-            {% endfor %}
-
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">{{boton}}</button>
+            <button type="submit" class="btn btn-primary">{{btnsi}}</button>
+            <a href=" {{list_url}}" type="button" class="btn btn-danger">Cancelar</a>
         </div>
+
 
 
     </div>

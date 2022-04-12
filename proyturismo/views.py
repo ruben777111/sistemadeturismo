@@ -1,7 +1,10 @@
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from urllib import request
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
+
+from proyturismo.forms import TransporteForm
 from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
@@ -47,12 +50,59 @@ class clientes(ListView):
 
 """vista para transporte"""
 
-class transporte(ListView):
+class transportelistview(ListView):  # ListView
     model = Transporte
     template_name = 'transporte/index.html'
     
-    def get_context_data(self, **kwargs):
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.method == 'GET':
+    #         return redirect('')
+    
+    def get_context_data(self, **kwargs):  # Context Parameters
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Listado de Transportes'
         context['pestaña'] = 'Listado de Transportes'
         return context
+
+class transportecreateview(CreateView):
+    # model = Transporte  # Parece que esto no influye
+    form_class = TransporteForm
+    template_name = 'transporte/crear.html'
+    success_url = reverse_lazy('transporte')
+    
+    def get_context_data(self, **kwargs):  # Context Parameters
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Nuevo Transporte'
+        context['pestaña'] = 'Nuevo Tranporte'
+        context['boton'] = 'Agregar Transporte'
+        return context
+class transporteupdateview(UpdateView):
+    model = Transporte
+    form_class = TransporteForm
+    template_name = 'transporte/crear.html'
+    success_url = reverse_lazy('transporte')
+    
+    def get_context_data(self, **kwargs):  # Context Parameters
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Transporte'
+        context['pestaña'] = 'Editar Tranporte'
+        context['boton'] = 'Actualizar Datos'
+        return context
+
+
+class transportedeleteview(DeleteView):
+    model = Transporte
+    template_name = 'transporte/eliminar.html'
+    success_url = reverse_lazy('transporte')
+    
+    def get_context_data(self, **kwargs):  # Context Parameters
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = '¿Eliminar Transporte?'
+        context['pestaña'] = 'Eliminar Tranporte'
+        context['list_url'] = reverse_lazy('transporte')
+        context['btnsi'] = 'Si, aceptar'
+        context['btnno'] = 'Cancelar'
+        
+        
+        return context
+    
