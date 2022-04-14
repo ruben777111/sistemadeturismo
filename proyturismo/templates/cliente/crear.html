@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+<form method="POST" action="">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-plus"></i>
+                {{titulo}}
+            </h3>
+        </div>
+        <div class="card-body">
+            {% csrf_token %}
+
+            {% for field in form.visible_fields %}
+            <div class="mb-3 mt-3">
+                <label for="">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">{{boton}}</button>
+        </div>
+    </div>
+</form>
+{% endblock contenido %}

@@ -1,6 +1,7 @@
-from django.forms import ModelForm, TextInput, Textarea
+from turtle import textinput
+from django.forms import ModelForm, NumberInput, TextInput, Textarea
 
-from proyturismo.models import Transporte
+from proyturismo.models import Cliente, Transporte
 
 
 class TransporteForm(ModelForm):
@@ -52,6 +53,60 @@ class TransporteForm(ModelForm):
                     'class' : 'form-control',
                 }
             ),
-
-
+        }
+        
+class ClienteForm(ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.visible_fields():
+            form.field.widget.attrs['class'] = 'form-control'
+            form.field.widget.attrs['autocomplete'] = 'off'
+            
+    
+    class Meta:
+        model = Cliente
+        fields = '__all__'
+        
+        labels = {
+            'idcliente': 'Carnet',
+            'nombrecliente': 'Nombre',
+            'apellidoscliente': 'Apellidos',
+            'edadcliente': 'Edad',
+            'direccioncliente': 'Direccion',
+            'celularcliente': 'Celular'
+        }
+        
+        widgets = {
+            'idcliente': TextInput(
+                attrs= {
+                    'placeholder': '1',
+                }
+            ),
+            'nombrecliente': TextInput(
+                attrs={
+                    'placeholder': 'Eduardo'
+                }
+            ),
+            'apellidoscliente' : TextInput(
+                attrs={
+                    'placeholder': 'Vargas Loza'
+                }
+            ),
+            'edadcliente': NumberInput(
+                attrs={
+                    'placeholder': '18'
+                }
+            ),
+            'direccioncliente': TextInput(
+                attrs={
+                    'placeholder': 'Av. Achachicala # 20'
+                }
+            ),
+            'celularcliente': TextInput(
+                attrs={
+                    'placeholder': '69945077'
+                }
+            ),
+            
         }

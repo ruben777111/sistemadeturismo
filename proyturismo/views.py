@@ -4,7 +4,7 @@ from urllib import request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
-from proyturismo.forms import TransporteForm
+from proyturismo.forms import ClienteForm, TransporteForm
 from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
@@ -36,18 +36,59 @@ def boleto(request):
 
 
 """vista para cliente"""
-class clientes(ListView):
+class clienteslistView(ListView):
     model = Cliente
     template_name = 'cliente/index.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Listado de Clientes'
+        context['titulo'] = 'Listado de Clientes'
         context['pestaña'] = 'Listado de Clientes'
         return context
 
-
-
+class clientescreateview(CreateView):
+    form_class = ClienteForm
+    template_name = 'cliente/crear.html'
+    success_url = reverse_lazy('cliente')
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Nuevo Cliente'
+        context['pestaña'] = 'Nuevo Cliente'
+        context['boton'] = 'Agregar Cliente'
+        return context
+    
+class clienteupdateview(UpdateView):
+    model = Cliente
+    form_class = ClienteForm
+    template_name = 'cliente/crear.html'
+    success_url = reverse_lazy('cliente')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = 'Editar Cliente'
+        context['pestaña'] = 'Editar Cliente'
+        context['boton'] = 'Actualizar Datos'
+        return context
+    
+class clientedeleteview(DeleteView):
+    model = Cliente
+    template_name = 'cliente/eliminar.html'
+    success_url = reverse_lazy('cliente')
+    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['titulo'] = '¿Eliminar Cliente?'
+        context['pestaña'] = 'Eliminar Cliente'
+        context['list_url'] = reverse_lazy('cliente')
+        context['btnsi'] = 'Si, aceptar'
+        context['btnno'] = 'Cancelar'
+        return context
+    
 """vista para transporte"""
 
 class transportelistview(ListView):  # ListView
@@ -63,7 +104,6 @@ class transportelistview(ListView):  # ListView
         context['titulo'] = 'Listado de Transportes'
         context['pestaña'] = 'Listado de Transportes'
         return context
-
 class transportecreateview(CreateView):
     # model = Transporte  # Parece que esto no influye
     form_class = TransporteForm
@@ -88,8 +128,6 @@ class transporteupdateview(UpdateView):
         context['pestaña'] = 'Editar Tranporte'
         context['boton'] = 'Actualizar Datos'
         return context
-
-
 class transportedeleteview(DeleteView):
     model = Transporte
     template_name = 'transporte/eliminar.html'
