@@ -18,6 +18,7 @@ urlpatterns=[
     
     #Boleto
     path('boleto',views.boleto,name='boleto'),
+    path('boleto/crear',views.crearboleto,name='crearboleto'),
     
     # Cliente
     path('cliente/', clienteslistView.as_view(), name='cliente'),

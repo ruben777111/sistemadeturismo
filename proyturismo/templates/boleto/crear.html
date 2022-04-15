@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+lista de destinos turisticos
+{% endblock %}
+
+{% block contenido %}
+Boleto agregar
+<div class="card text-start|center|end">
+  <img class="card-img-top" src="holder.js/100px180/" alt="">
+  <div class="card-body">
+    <h4 class="card-title">datos del boleto</h4>
+    {% include 'boleto/form.html' %} </div>
+</div>
+
+
+
+{% endblock %}

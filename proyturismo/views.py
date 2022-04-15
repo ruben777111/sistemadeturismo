@@ -47,7 +47,8 @@ def editardestinoturistico(request,id):
 def boleto(request):
     return render(request,'boleto/index.html')
 
-
+def crearboleto(request):
+    return render(request,'boleto/crear.html')
 
 
 """vista para cliente"""

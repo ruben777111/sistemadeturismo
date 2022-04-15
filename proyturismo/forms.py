@@ -116,3 +116,19 @@ class destinoform(forms.ModelForm):
     class Meta:
         model=Destinoturistico
         fields='__all__'
+
+"""
+
+generos= [
+    ('hetero', 'Heterosexual'),
+    ('homo', 'Homosexual'),
+    ('bi', 'Bisexual'),
+    ('ase', 'Asexual'),
+    ('pan', 'Pansexual'),
+    ]
+
+class formulario(forms.Form):
+    nombre= forms.CharField(max_length=100)
+    apellido= forms.CharField(max_length=100)
+    genero= forms.CharField(label='Seleccione su genero', widget=forms.Select(choices=genero))
+    comentario= forms.CharField(max_length=100)"""

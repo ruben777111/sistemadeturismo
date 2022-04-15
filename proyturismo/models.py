@@ -33,7 +33,7 @@ class Cliente(models.Model):
         ordering = ['idcliente']
 
 class Transporte(models.Model):
-    idtransporte = models.IntegerField(primary_key=True)
+    idtransporte = models.AutoField(primary_key=True)
     tipotransporte = models.CharField(max_length=20)
     preciotransporte = models.DecimalField(default=0.00, max_digits=9, decimal_places=2)
     descripciontransporte = models.CharField(max_length=50)
@@ -42,7 +42,7 @@ class Transporte(models.Model):
         db_table = 'Transportes'
         ordering = ['idtransporte']
 class Boleto(models.Model):
-    idboleto = models.IntegerField(primary_key=True)
+    idboleto = models.AutoField(primary_key=True)
     idcliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     iddestino = models.ForeignKey(Destinoturistico, on_delete=models.CASCADE)
     idtransporte = models.ForeignKey(Transporte, on_delete=models.CASCADE)
