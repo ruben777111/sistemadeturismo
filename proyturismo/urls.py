@@ -9,12 +9,14 @@ urlpatterns=[
     path('',views.login,name='login'),
     path('login',views.login,name='login'),
 
-
+    # Destinoturistico
     path('destinoturistico',views.destinoturistico,name='destinoturistico'),
     path('destinoturistico/crear',views.creardestinoturistico,name='creardestinoturistico'),
     path('destinoturistico/editar',views.editardestinoturistico,name='editardestinoturistico'),
+    path('eliminardestino/<int:id>',views.eliminardestino,name='eliminardestino'),
+    path('destinoturistico/editar/<int:id>',views.editardestinoturistico,name='editardestinoturistico'),
     
-
+    #Boleto
     path('boleto',views.boleto,name='boleto'),
     
     # Cliente

@@ -4,7 +4,7 @@ from urllib import request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
-from proyturismo.forms import ClienteForm, TransporteForm
+from proyturismo.forms import ClienteForm, TransporteForm, destinoform
 from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
@@ -20,12 +20,27 @@ def destinoturistico(request):
     return render(request,'destinoturistico/index.html',{'destino':destino})
     
 def creardestinoturistico(request):
-    return render(request,'destinoturistico/crear.html')
+    """request.FILES or None para recepcionar archivos"""
+    formulario=destinoform(request.POST or None,request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('destinoturistico')
+    return render(request,'destinoturistico/crear.html',{'formulario':formulario})
 
-def editardestinoturistico(request):
-    return render(request,'destinoturistico/editar.html')
 
 
+def eliminardestino(request,id):
+    destino=Destinoturistico.objects.get(iddestino=id)
+    destino.delete()
+    return redirect('destinoturistico')
+
+def editardestinoturistico(request,id):
+    destino=Destinoturistico.objects.get(iddestino=id)
+    formulario=destinoform(request.POST or None, request.FILES or None, instance=destino)
+    if formulario.is_valid() and request.method =='POST':
+        formulario.save()
+        return redirect('destinoturistico')
+    return render(request,'destinoturistico/editar.html',{'formulario':formulario})
 
 
 """vista para boleto"""

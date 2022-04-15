@@ -1,7 +1,8 @@
 from turtle import textinput
 from django.forms import ModelForm, NumberInput, TextInput, Textarea
 
-from proyturismo.models import Cliente, Transporte
+from proyturismo.models import Cliente, Transporte,Destinoturistico
+from django import forms
 
 
 class TransporteForm(ModelForm):
@@ -110,3 +111,8 @@ class ClienteForm(ModelForm):
             ),
             
         }
+
+class destinoform(forms.ModelForm):
+    class Meta:
+        model=Destinoturistico
+        fields='__all__'

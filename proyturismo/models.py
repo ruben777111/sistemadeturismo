@@ -9,7 +9,7 @@ class Destinoturistico(models.Model):
     multimedia=models.ImageField(upload_to='imagenes/',verbose_name="Imagen", null=True)
     direcllegada=models.CharField(max_length=50, verbose_name="Direccion llegada",null=True)
     descripciondes=models.CharField(max_length=50, verbose_name="Descripcion",null=True)
-    horario_viaje=models.DateTimeField(auto_now_add=False,verbose_name="Horario",null=True)
+    horario_viaje=models.CharField(max_length=10, verbose_name="Horario",null=True)
     
     def __str__(self):
         fila="Titulo:" + self.nomdestino + "-" + "Destino:" + self.descripciondes
