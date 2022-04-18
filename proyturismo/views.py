@@ -4,7 +4,7 @@ from urllib import request
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 
-from proyturismo.forms import ClienteForm, TransporteForm, destinoform
+from proyturismo.forms import ClienteForm, TransporteForm, destinoform,boletoform
 from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
@@ -48,8 +48,16 @@ def boleto(request):
     return render(request,'boleto/index.html')
 
 def crearboleto(request):
-    return render(request,'boleto/crear.html')
+    destino=Destinoturistico.objects.all()
+    transporte=Transporte.objects.all()
+    formulario=boletoform(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('boleto')
+    return render(request,'boleto/form.html',{'formulario':formulario , 'destino':destino ,'transporte':transporte})
 
+
+ 
 
 """vista para cliente"""
 class clienteslistView(ListView):
