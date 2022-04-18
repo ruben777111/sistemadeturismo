@@ -1,24 +1,51 @@
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from urllib import request
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-from proyturismo.forms import ClienteForm, TransporteForm, destinoform
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth import authenticate, login, logout
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from proyturismo.forms import *
 from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
 def inicio(request):
     return HttpResponse("<h1>bienveenido</h1>")
-def login(request):
-    return render(request,'ingresar/login.html')
+
+def loginUser(request):
+    
+    if request.method == 'POST':
+        usuario = request.POST['user']
+        contraseña = request.POST['password']
+        next_ = request.GET.get('next', 'destinoturistico')
+        userobj = authenticate(username=usuario, password=contraseña)
+        
+        if userobj != None:
+            login(request, userobj)
+            return redirect(next_)
+        else:
+            msg = 'Datos incorrectos, intente de nuevo!'
+        
+    else: 
+        msg = ''
+    return render(request, 'ingresar/login.html', {'msg': msg})
+    
+    
+
+    
+
+def logoutuser(request):
+    logout(request)
+    return redirect('login')
+    
 
 """vista para destinoturistico"""
+@login_required
 def destinoturistico(request):
     destino=Destinoturistico.objects.all()
 
     return render(request,'destinoturistico/index.html',{'destino':destino})
-    
+@login_required
 def creardestinoturistico(request):
     """request.FILES or None para recepcionar archivos"""
     formulario=destinoform(request.POST or None,request.FILES or None)
@@ -28,12 +55,12 @@ def creardestinoturistico(request):
     return render(request,'destinoturistico/crear.html',{'formulario':formulario})
 
 
-
+@login_required
 def eliminardestino(request,id):
     destino=Destinoturistico.objects.get(iddestino=id)
     destino.delete()
     return redirect('destinoturistico')
-
+@login_required
 def editardestinoturistico(request,id):
     destino=Destinoturistico.objects.get(iddestino=id)
     formulario=destinoform(request.POST or None, request.FILES or None, instance=destino)
@@ -44,9 +71,11 @@ def editardestinoturistico(request,id):
 
 
 """vista para boleto"""
+@login_required
 def boleto(request):
     return render(request,'boleto/index.html')
 
+@login_required
 def crearboleto(request):
     return render(request,'boleto/crear.html')
 
@@ -55,6 +84,11 @@ def crearboleto(request):
 class clienteslistView(ListView):
     model = Cliente
     template_name = 'cliente/index.html'
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,6 +101,9 @@ class clientescreateview(CreateView):
     template_name = 'cliente/crear.html'
     success_url = reverse_lazy('cliente')
     
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -81,6 +118,10 @@ class clienteupdateview(UpdateView):
     template_name = 'cliente/crear.html'
     success_url = reverse_lazy('cliente')
     
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context = super().get_context_data(**kwargs)
@@ -94,6 +135,9 @@ class clientedeleteview(DeleteView):
     template_name = 'cliente/eliminar.html'
     success_url = reverse_lazy('cliente')
     
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -111,9 +155,10 @@ class transportelistview(ListView):  # ListView
     model = Transporte
     template_name = 'transporte/index.html'
     
-    # def dispatch(self, request, *args, **kwargs):
-    #     if request.method == 'GET':
-    #         return redirect('')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):  # Context Parameters
         context = super().get_context_data(**kwargs)
@@ -125,6 +170,10 @@ class transportecreateview(CreateView):
     form_class = TransporteForm
     template_name = 'transporte/crear.html'
     success_url = reverse_lazy('transporte')
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):  # Context Parameters
         context = super().get_context_data(**kwargs)
@@ -138,16 +187,25 @@ class transporteupdateview(UpdateView):
     template_name = 'transporte/crear.html'
     success_url = reverse_lazy('transporte')
     
-    def get_context_data(self, **kwargs):  # Context Parameters
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Editar Transporte'
         context['pestaña'] = 'Editar Tranporte'
         context['boton'] = 'Actualizar Datos'
         return context
+    
 class transportedeleteview(DeleteView):
     model = Transporte
     template_name = 'transporte/eliminar.html'
     success_url = reverse_lazy('transporte')
+    
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):  # Context Parameters
         context = super().get_context_data(**kwargs)

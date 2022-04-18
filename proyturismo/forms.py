@@ -1,17 +1,41 @@
-from turtle import textinput
+from tkinter import Widget
 from django.forms import ModelForm, NumberInput, TextInput, Textarea
-
+from django.contrib.auth.forms import UserCreationForm
 from proyturismo.models import Cliente, Transporte,Destinoturistico
 from django import forms
 
-
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget = forms.TextInput(
+            attrs={
+                'class': 'form-control my-4 py-2',
+                'placeholder': 'Usuario'
+            }
+        )
+    )
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs={
+                'class': 'form-control my-4 py-2',
+                'placeholder': 'Password'
+            }
+        )
+    )
+    class Meta:
+        model = UserCreationForm
+        fields = '__all__'
+        
+        labels = {
+            'username': 'Usuario',
+            'password': 'Nombre',
+        }
 class TransporteForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():  # información repetida
             form.field.widget.attrs['class'] = 'form-control'
             form.field.widget.attrs['autocomplete'] = 'off'
-        self.fields['idtransporte'].widget.attrs['autofocus'] = True  # Autofocus
+        self.fields['tipotransporte'].widget.attrs['autofocus'] = True  # Autofocus
 
     class Meta:
         model = Transporte
