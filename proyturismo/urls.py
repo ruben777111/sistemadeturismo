@@ -9,7 +9,8 @@ urlpatterns=[
     path('',loginUser),  # Momentáneo
     path('login',loginUser, name='login'),
     path('logout/', logoutuser, name='logout' ),
-
+    # Pagina web compra de pasaje
+    path('paginaweb',views.paginaweb,name='paginaweb'),
     # Destinoturistico
     path('destinoturistico',views.destinoturistico,name='destinoturistico'),
     path('destinoturistico/crear',views.creardestinoturistico,name='creardestinoturistico'),
@@ -33,6 +34,8 @@ urlpatterns=[
     path('transporte/crear/', transportecreateview.as_view(), name='creartransporte'),
     path('transporte/editar/<int:pk>', transporteupdateview.as_view(), name='editartransporte'),
     path('transporte/eliminar/<int:pk>', transportedeleteview.as_view(), name='eliminartransporte'),
+
+    #
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
