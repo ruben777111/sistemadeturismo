@@ -16,8 +16,10 @@
         placeholder="{{ campo.label }}"
         value="{{ campo.value | default:'' }}"/> 
     </div>
+
     <div class="col-12 help-text>">{{ campo.errors }}</div>
-{% endfor %}    
+{% endfor %}   
+
 <input name="" id="" class="btn btn-success" type="submit" value="Enviar información">
 <a name="" id="" class="btn btn-primary" href="{% url 'destinoturistico' %}" role="button">Cancelar</a>
 </form>

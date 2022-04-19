@@ -28,7 +28,18 @@ contenido del destino turistico
           <a name="" id="" class="btn btn-info" href="{% url 'editardestinoturistico' dest.iddestino %}" role="button">Editar</a>
           <a name="" id="" class="btn btn-danger" href="{% url 'eliminardestino' dest.iddestino %}" role="button">Eliminar</a>
       </tr>
+
+
       {% endfor %}
+
+      <select name="desitno" >
+       {% for dest in destino %}
+        <option >{{ dest.nomdestino }}</option>
+     {% endfor %} 
+        </select> 
+      
+
+     
     </tbody>
   </table>
 {% endblock %}

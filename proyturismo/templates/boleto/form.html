@@ -1,0 +1,60 @@
+    Destino turistico: 
+    <select name="destino" value="{{ dest.iddestino }}">
+        {% for dest in destino %}
+        <option >{{ dest.nomdestino }}</option>
+        {% endfor %} 
+     </select> 
+
+     Tipo transporte: 
+     <select name="transporte" >
+        {% for trans in transporte %}
+         <option >{{ trans.tipotransporte }}</option>
+        {% endfor %} 
+     </select> 
+    
+     Horario: 
+     <select name="horario" >
+        {% for dest in destino %}
+        <option >{{ dest.horario_viaje }}</option>
+        {% endfor %}  
+     </select> 
+
+     Tipo de Pago:
+     <select name="tipopago" >
+       
+         <option >Tarjeta de credito</option>
+         <option >PayPal</option>
+         <option >Amazon Pay</option>
+         <option >Bitcoins</option>
+         <option >Criptomonedas</option>
+        
+     </select> 
+
+     <label for="start">Start date:</label>
+
+     <input id="date" type="date"> <br>
+     ------------------------------------------------------
+    
+     <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {% for campo in formulario %}
+            <div    class="mb3">
+                <label for="" class="form-label">{{ campo.label }}</label>
+
+                <input 
+                type="{{ campo.field.widget.input_type  }}" 
+                class="form-control" 
+                name="{{ campo.name }}" 
+                id=""
+                aria-roledescription="helpid"
+                placeholder="{{ campo.label }}"
+                value="{{ campo.value | default:'' }}"/> 
+            </div>
+        
+            <div class="col-12 help-text>">{{ campo.errors }}</div>
+        {% endfor %}   
+        
+        <input name="" id="" class="btn btn-success" type="submit" value="Enviar información">
+        <a name="" id="" class="btn btn-primary" href="{% url 'boleto' %}" role="button">Cancelar</a>
+        </form>
+        
