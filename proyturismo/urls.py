@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views
-
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
-from proyturismo.views import clientedeleteview, clientescreateview, clienteslistView, clienteupdateview, transportelistview, transportecreateview, transporteupdateview, transportedeleteview
+from proyturismo.views import *
 
 urlpatterns=[
-    path('',views.login,name='login'),
-    path('login',views.login,name='login'),
+    # path('',views.login,name='index'),
+    path('',loginUser),  # Momentáneo
+    path('login',loginUser, name='login'),
+    path('logout/', logoutuser, name='logout' ),
 
     # Destinoturistico
     path('destinoturistico',views.destinoturistico,name='destinoturistico'),

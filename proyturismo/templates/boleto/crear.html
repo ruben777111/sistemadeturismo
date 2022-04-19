@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-compra de boletos
+lista de destinos turisticos
 {% endblock %}
 
 {% block contenido %}
@@ -10,45 +10,7 @@ Boleto agregar
   <img class="card-img-top" src="holder.js/100px180/" alt="">
   <div class="card-body">
     <h4 class="card-title">datos del boleto</h4>
-    Destino turistico: 
-    <select name="destino" value="{{ dest.iddestino }}">
-        {% for dest in destino %}
-        <option >{{ dest.nomdestino }}</option>
-        {% endfor %} 
-     </select> 
-
-     Tipo transporte: 
-     <select name="transporte" >
-        {% for trans in transporte %}
-         <option >{{ trans.tipotransporte }}</option>
-        {% endfor %} 
-     </select> 
-    
-     Horario: 
-     <select name="horario" >
-        {% for dest in destino %}
-        <option >{{ dest.horario_viaje }}</option>
-        {% endfor %}  
-     </select> 
-
-     Tipo de Pago:
-     <select name="tipopago" >
-       
-         <option >Tarjeta de credito</option>
-         <option >Tarjeta de debito</option>
-         <option >PayPal</option>
-         <option >Amazon Pay</option>
-         <option >Bitcoins</option>
-         <option >Dark Net</option>
-         <option >Criptomonedas</option>
-        
-     </select> 
-
-     <label for="start">Start date:</label>
-
-     <input id="date" type="date"> <br>
-     ------------------------------------------------------
-    <!--{% include 'boleto/form.html' %} </div>-->
+    {% include 'boleto/form.html' %} </div>
 </div>
 
 

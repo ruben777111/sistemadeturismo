@@ -1,17 +1,41 @@
-from turtle import textinput
+from tkinter import Widget
 from django.forms import ModelForm, NumberInput, TextInput, Textarea
-
-from proyturismo.models import Cliente, Transporte,Destinoturistico,Boleto
+from django.contrib.auth.forms import UserCreationForm
+from proyturismo.models import Cliente, Transporte,Destinoturistico
 from django import forms
 
-
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget = forms.TextInput(
+            attrs={
+                'class': 'form-control my-4 py-2',
+                'placeholder': 'Usuario'
+            }
+        )
+    )
+    password = forms.CharField(
+        widget = forms.PasswordInput(
+            attrs={
+                'class': 'form-control my-4 py-2',
+                'placeholder': 'Password'
+            }
+        )
+    )
+    class Meta:
+        model = UserCreationForm
+        fields = '__all__'
+        
+        labels = {
+            'username': 'Usuario',
+            'password': 'Nombre',
+        }
 class TransporteForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for form in self.visible_fields():  # información repetida
             form.field.widget.attrs['class'] = 'form-control'
             form.field.widget.attrs['autocomplete'] = 'off'
-        self.fields['idtransporte'].widget.attrs['autofocus'] = True  # Autofocus
+        self.fields['tipotransporte'].widget.attrs['autofocus'] = True  # Autofocus
 
     class Meta:
         model = Transporte
@@ -117,7 +141,18 @@ class destinoform(forms.ModelForm):
         model=Destinoturistico
         fields='__all__'
 
-class boletoform(forms.ModelForm):
-    class Meta:
-        model=Boleto
-        fields='__all__'
+"""
+
+generos= [
+    ('hetero', 'Heterosexual'),
+    ('homo', 'Homosexual'),
+    ('bi', 'Bisexual'),
+    ('ase', 'Asexual'),
+    ('pan', 'Pansexual'),
+    ]
+
+class formulario(forms.Form):
+    nombre= forms.CharField(max_length=100)
+    apellido= forms.CharField(max_length=100)
+    genero= forms.CharField(label='Seleccione su genero', widget=forms.Select(choices=genero))
+    comentario= forms.CharField(max_length=100)"""
