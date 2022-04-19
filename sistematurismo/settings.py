@@ -122,6 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+<<<<<<< HEAD
 # =======<<<<<<< HEAD>>>>>>> 18d0f6e54eac9cb0142717281f629daf2488d7af
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -131,6 +132,10 @@ LOGIN_URL = 'login'
 
 
 
+=======
+LOGIN_URL = 'login'
+
+>>>>>>> 9e94a22fb1cc5ebc72af0d5c0eafff76d127e4a3
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
