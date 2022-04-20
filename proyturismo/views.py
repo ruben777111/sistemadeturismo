@@ -77,8 +77,8 @@ def boleto(request):
     return render(request,'boleto/index.html')
 
 @login_required
-def crearboleto(request):
-    return render(request,'boleto/crear.html')
+def crearboletocliente(request):
+    return render(request,'boleto/formcliente.html')
 
 
 """vista para cliente"""
