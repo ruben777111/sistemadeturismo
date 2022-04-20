@@ -6,7 +6,8 @@ from proyturismo.views import *
 
 urlpatterns=[
     # path('',views.login,name='index'),
-    path('',loginUser),  # Momentáneo
+    path('', LoginUsuario.as_view()),
+    # path('',loginUser),  # Momentáneo
     path('login',loginUser, name='login'),
     path('logout/', logoutuser, name='logout' ),
 
