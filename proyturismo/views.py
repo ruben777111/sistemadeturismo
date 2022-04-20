@@ -38,9 +38,7 @@ def logoutuser(request):
     logout(request)
     return redirect('login')
     
-""" vista de pagina web"""
-def paginaweb(request):
-    return render(request,'paginaweb/index.html')
+
 
 """vista para destinoturistico"""
 @login_required
