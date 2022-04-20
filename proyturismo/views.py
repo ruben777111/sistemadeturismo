@@ -78,7 +78,12 @@ def boleto(request):
 
 @login_required
 def crearboletocliente(request):
-    return render(request,'boleto/formcliente.html')
+       
+    formulario=boletoclienteform(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('destinoturistico')    
+    return render(request,'boleto/formcliente.html',{'formulario':formulario})
 
 
 """vista para cliente"""

@@ -1,7 +1,7 @@
 from tkinter import Widget
 from django.forms import ModelForm, NumberInput, TextInput, Textarea
 from django.contrib.auth.forms import UserCreationForm
-from proyturismo.models import Cliente, Transporte,Destinoturistico
+from proyturismo.models import Cliente, Transporte,Destinoturistico, Boleto
 from django import forms
 
 class LoginForm(forms.Form):
@@ -141,18 +141,7 @@ class destinoform(forms.ModelForm):
         model=Destinoturistico
         fields='__all__'
 
-"""
-
-generos= [
-    ('hetero', 'Heterosexual'),
-    ('homo', 'Homosexual'),
-    ('bi', 'Bisexual'),
-    ('ase', 'Asexual'),
-    ('pan', 'Pansexual'),
-    ]
-
-class formulario(forms.Form):
-    nombre= forms.CharField(max_length=100)
-    apellido= forms.CharField(max_length=100)
-    genero= forms.CharField(label='Seleccione su genero', widget=forms.Select(choices=genero))
-    comentario= forms.CharField(max_length=100)"""
+class boletoclienteform(forms.ModelForm):
+    class Meta:
+        model=Cliente
+        fields='__all__'

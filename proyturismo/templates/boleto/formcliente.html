@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    form
-</body>
-</html>
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    {% for campo in formulario %}
+        <div    class="mb3">
+            <label for="" class="form-label">{{ campo.label }}</label>
+            {% if campo.field.widget.input_type == 'file' and campo.value %}
+            <br>
+            <img src="{{MEDIA_URL}}/imagenes/{{ campo.value }}" width="100" alt srcset="">
+            {% endif %}
+            <input 
+            type="{{ campo.field.widget.input_type  }}" 
+            class="form-control" 
+            name="{{ campo.name }}" 
+            id=""
+            aria-roledescription="helpid"
+            placeholder="{{ campo.label }}"
+            value="{{ campo.value | default:'' }}"/> 
+        </div>
+        <div class="col-12 help-text>">{{ campo.errors }}</div>
+    {% endfor %}    
+    <input name="" id="" class="btn btn-success" type="submit" value="Continuar con el registro">
+    <a name="" id="" class="btn btn-primary" href="{% url 'destinoturistico' %}" role="button">Cancelar con doreccion desde la pag web</a>
+    </form>
