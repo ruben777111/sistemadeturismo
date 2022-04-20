@@ -1,10 +1,17 @@
+# Shortcuts
 from django.shortcuts import render, redirect
+# Html
 from django.http import HttpResponse
+# Urls
 from django.urls import reverse_lazy
+# Decoradores
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+# Login
 from django.contrib.auth import authenticate, login, logout
+# Vistas para CRUD
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+# Esto no sé
 from proyturismo.forms import *
 from .models import Cliente, Destinoturistico, Transporte
 
@@ -17,7 +24,7 @@ def loginUser(request):
     if request.method == 'POST':
         usuario = request.POST['user']
         contraseña = request.POST['password']
-        next_ = request.GET.get('next', 'destinoturistico')
+        next_ = request.GET.get('next', 'cliente')
         userobj = authenticate(username=usuario, password=contraseña)
         
         if userobj != None:
