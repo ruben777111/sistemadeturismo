@@ -9,8 +9,7 @@ urlpatterns=[
     path('',loginUser),  # Momentáneo
     path('login',loginUser, name='login'),
     path('logout/', logoutuser, name='logout' ),
-    # Pagina web compra de pasaje
-    path('paginaweb',views.paginaweb,name='paginaweb'),
+
     # Destinoturistico
     path('destinoturistico',views.destinoturistico,name='destinoturistico'),
     path('destinoturistico/crear',views.creardestinoturistico,name='creardestinoturistico'),
@@ -20,7 +19,7 @@ urlpatterns=[
     
     #Boleto
     path('boleto',views.boleto,name='boleto'),
-    path('boleto/crear',views.crearboleto,name='crearboleto'),
+    path('boleto/crearboletocliente',views.crearboletocliente,name='crearboletocliente'),
     
     # Cliente
     path('cliente/', clienteslistView.as_view(), name='cliente'),

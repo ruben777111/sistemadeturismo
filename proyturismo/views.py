@@ -45,9 +45,7 @@ def logoutuser(request):
     logout(request)
     return redirect('login')
     
-""" vista de pagina web"""
-def paginaweb(request):
-    return render(request,'paginaweb/index.html')
+
 
 """vista para destinoturistico"""
 @login_required
@@ -86,8 +84,13 @@ def boleto(request):
     return render(request,'boleto/index.html')
 
 @login_required
-def crearboleto(request):
-    return render(request,'boleto/crear.html')
+def crearboletocliente(request):
+       
+    formulario=boletoclienteform(request.POST or None)
+    if formulario.is_valid():
+        formulario.save()
+        return redirect('destinoturistico')    
+    return render(request,'boleto/formcliente.html',{'formulario':formulario})
 
 
 """vista para cliente"""
