@@ -6,36 +6,49 @@
 
 {% block contenido %}
 
-<div class="container mt-3">
-    <h2>{{titulo}}</h2>
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Edad</th>
-                <th>Dirección</th>
-                <th>Celular</th>
-                <th colspan="2">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="container-fluid p-5 ">
+    <div class="card">
+        <div class="card-header">
+            <h2><center>{{titulo}}</center></h2>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Edad</th>
+                        <th>Dirección</th>
+                        <th>Celular</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            {% for cliente in object_list %}
-            <tr>
-                <td>{{ cliente.nombrecliente}}</td>
-                <td>{{ cliente.apellidoscliente }}</td>
-                <td>{{ cliente.edadcliente }}</td>
-                <td>{{ cliente.direccioncliente }}</td>
-                <td>{{ cliente.celularcliente }}</td>
-                <td><a href="{% url 'editarcliente' cliente.idcliente %}" class="btn btn-success">Editar</a></td>
-                <td><a href="{% url 'eliminarcliente' cliente.idcliente %}" class="btn btn-danger">Eliminar</a></td>
+                    {% for cliente in object_list %}
+                    <tr>
+                        <td>{{ cliente.nombrecliente}}</td>
+                        <td>{{ cliente.apellidoscliente }}</td>
+                        <td>{{ cliente.edadcliente }}</td>
+                        <td>{{ cliente.direccioncliente }}</td>
+                        <td>{{ cliente.celularcliente }}</td>
+                        <td><a href="{% url 'editarcliente' cliente.idcliente %}" class="btn btn-primary"><i
+                                    class="fa-solid fa-pen"></i></a>
+                            <a href="{% url 'eliminarcliente' cliente.idcliente %}" class="btn btn-danger"><i
+                                    class="fa-solid fa-trash-can"></i></a>
+                        </td>
 
-            </tr>
-            {% endfor %}
+                    </tr>
+                    {% endfor %}
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'crearcliente' %}" class="btn btn-primary" role="button">Nuevo CLiente (Solo para
+                Pruebas)</a>
+        </div>
+    </div>
 </div>
-<a href="{% url 'crearcliente' %}" class="btn btn-primary" role="button">Nuevo CLiente (Solo para Pruebas)</a>
+
 {% endblock %}

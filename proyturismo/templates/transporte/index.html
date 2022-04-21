@@ -6,34 +6,44 @@
 
 {% block contenido %}
 
-<div class="container mt-3">
-    <h2>{{titulo}}</h2>
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>Descripcion</th>
-                <th colspan="2">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            {% for transporte in object_list %}
-            <tr>
-                <td>{{ transporte.tipotransporte }}</td>
-                <td>{{ transporte.preciotransporte }}</td>
-                <td>{{ transporte.descripciontransporte }}</td>
-                <td><a href=" {% url 'editartransporte' transporte.idtransporte %}" class="btn btn-success">Editar</a></td>
-                <td><a href=" {% url 'eliminartransporte' transporte.idtransporte %}" class="btn btn-danger">Eliminar</a></td>
-
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-    </table>
+<div class="container-fluid p-5 ">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <center>{{titulo}}</center>
+            </h2>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Descripcion</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                    {% for transporte in object_list %}
+                    <tr>
+                        <td>{{ transporte.tipotransporte }}</td>
+                        <td>{{ transporte.preciotransporte }}</td>
+                        <td>{{ transporte.descripciontransporte }}</td>
+                        <td><a href=" {% url 'editartransporte' transporte.idtransporte %}" class="btn btn-primary">Editar</a>
+                        <a href=" {% url 'eliminartransporte' transporte.idtransporte %}" class="btn btn-danger">Eliminar</a></td>
+        
+                    </tr>
+        
+                    {% endfor %}
+        
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'crearcliente' %}" class="btn btn-primary" role="button">Nuevo Transporte</a>
+        </div>
+    </div>
 </div>
-<a href=" {% url 'creartransporte' %} " class="btn btn-primary" role="button">Nuevo Transporte</a>
-{% endblock %}
 
+{% endblock %}

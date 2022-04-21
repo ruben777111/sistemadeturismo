@@ -1,34 +1,56 @@
 {% extends "base.html" %}
 
 {% block titulo %}
-lista de destinos turisticos
+{{pestaña}}
 {% endblock %}
 
 {% block contenido %}
-contenido del destino turistico
-<p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Agregar nuevo destino turistico</a> </p> 
 
-<table class="table table-striped table-dark">
-    <thead>
-        {% for dest in destino %}
-      <tr>
-        <th >{{ dest.iddestino }}</th>
-        <th >{{ dest.nomdestino }}</th>
-        <th >{{ dest.preciodestino }}</th>
-        <th>
-          <img src="{{ dest.multimedia.url }}" height="50">
-        </th>
+<div class="container-fluid p-5 ">
+    <div class="card">
+        <div class="card-header">
+            <h2><center>Listado Destinos Turisticos</center></h2>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Dirección</th>
+                        <th>Descripción</th>
+                        <th>Horario</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                  {% for dest in destino %}
+                    <tr>
+                        <td>{{ dest.iddestino }}</td>
+                        <td>{{ dest.nomdestino }}</td>
+                        <td>{{ dest.preciodestino }}</td>
+                        <td><img src="{{ dest.multimedia.url }}" height="50"></td>
+                        <td>{{ dest.direcllegada }}</td>
+                        <td>{{ dest.descripciondes }}</td>
+                        <td>{{ dest.horario_viaje }}</td>
+                        <td><a href="{% url 'editardestinoturistico' dest.iddestino %}" class="btn btn-primary"><i
+                                    class="fa-solid fa-pen"></i></a>
+                            <a href="{% url 'eliminardestino' dest.iddestino %}" class="btn btn-danger"><i
+                                    class="fa-solid fa-trash-can"></i></a>
+                        </td>
 
-        <th>{{ dest.direcllegada }}</th>
-        <th>{{ dest.descripciondes }}</th>
-        <th>{{ dest.horario_viaje }}</th>
+                    </tr>
+                    {% endfor %}
 
-        <td>
-          <a name="" id="" class="btn btn-info" href="{% url 'editardestinoturistico' dest.iddestino %}" role="button">Editar</a>
-          <a name="" id="" class="btn btn-danger" href="{% url 'eliminardestino' dest.iddestino %}" role="button">Eliminar</a>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+          <p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Nuevo Destino Turistico</a> </p> 
+        </div>
+    </div>
+</div>
+
 {% endblock %}
