@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'proyturismo'
+    'proyturismo',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -123,22 +124,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
-# =======<<<<<<< HEAD>>>>>>> 18d0f6e54eac9cb0142717281f629daf2488d7af
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-LOGIN_URL = 'login'
-
-
-
 # Archivos staticos
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_URL = 'login'
+# Se coloca el nombre que se le asigno a la URL
+LOGIN_URL = 'login'  
+LOGIN_REDIRECT_URL = 'boleto'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

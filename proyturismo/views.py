@@ -1,7 +1,7 @@
 # Shortcuts
 from django.shortcuts import render, redirect
 # Html
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 # Urls
 from django.urls import reverse_lazy
 # Decoradores
@@ -11,6 +11,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import FormView
+from django.forms import ValidationError
 # Vistas para CRUD
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 # Esto no sé
@@ -19,24 +21,58 @@ from .models import Cliente, Destinoturistico, Transporte
 
 # Create your views here.
 
+def pruebas(request):
+    return render(request, 'pruebas.html')
+
 
 def inicio(request):
     return HttpResponse("<h1>bienveenido</h1>")
 
 # ========================= LOGIN ======================================
-class LoginUsuario(LoginView):
+class LoginViewUser(LoginView):
     template_name = 'ingresar/loginU.html'
-    form_name = AuthenticationForm
+    
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('boleto')
+        return super().dispatch(request, *args, **kwargs)
+    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['titulo'] = 'Iniciar Sesión'
         return context
+
+# class LoginViewUser2(FormView):
+#     template_name = 'ingresar/loginU.html'
+#     form_class = AuthenticationForm
+#     success_url = reverse_lazy('boleto')
     
+#     def dispatch(self, request, *args, **kwargs):
+#         if request.user.is_authenticated:
+#             return HttpResponseRedirect(self.success_url)
+#         return super().dispatch(request, *args, **kwargs,)
+    
+#     def form_valid(self, form):
+#         login(self.request, form.get_user())
+#         return HttpResponseRedirect(self.success_url)
+    
+#     def get_invalid_login_error(self):
+#         return ValidationError(
+#             self.error_messages["invalid_login"],
+#             code="invalid_login",
+#             params={"username": self.username_field.verbose_name},
+#         )
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['titulo'] = 'Iniciar Sesión'
+#         # context['msg'] = 'Usuario Incorrecto'
+#         return context
 
 
 def loginUser(request):
-
     if request.method == 'POST':
         usuario = request.POST['user']
         contraseña = request.POST['password']
@@ -162,7 +198,7 @@ class clienteupdateview(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context = super().get_context_data(**kwargs)
+        
         context['titulo'] = 'Editar Cliente'
         context['pestaña'] = 'Editar Cliente'
         context['boton'] = 'Actualizar Datos'

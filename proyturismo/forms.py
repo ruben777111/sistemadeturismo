@@ -1,34 +1,8 @@
-from tkinter import Widget
 from django.forms import ModelForm, NumberInput, TextInput, Textarea
 from django.contrib.auth.forms import UserCreationForm
-from proyturismo.models import Cliente, Transporte,Destinoturistico, Boleto
+from proyturismo.models import Cliente, Transporte,Destinoturistico
 from django import forms
 
-class LoginForm(forms.Form):
-    username = forms.CharField(
-        widget = forms.TextInput(
-            attrs={
-                'class': 'form-control my-4 py-2',
-                'placeholder': 'Usuario'
-            }
-        )
-    )
-    password = forms.CharField(
-        widget = forms.PasswordInput(
-            attrs={
-                'class': 'form-control my-4 py-2',
-                'placeholder': 'Password'
-            }
-        )
-    )
-    class Meta:
-        model = UserCreationForm
-        fields = '__all__'
-        
-        labels = {
-            'username': 'Usuario',
-            'password': 'Nombre',
-        }
 class TransporteForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

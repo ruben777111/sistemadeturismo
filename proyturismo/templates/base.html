@@ -180,6 +180,7 @@
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">{{user.username}}</a>
+                        <a href="#" class="d-block">{{user.email}}</a>
                     </div>
                 </div>
 
@@ -208,7 +209,8 @@
                                 <i class="fa-solid fa-ticket"></i>
                                 <p>
                                     Boletos
-                                    <!-- <span class="badge badge-info right">2</span> -->
+                                    <!-- <span class="badge badge-info right"></span> -->
+                                    
                                 </p>
                             </a>
                         </li>
@@ -310,7 +312,8 @@
     <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
     <!-- Bootstrap 4 -->
     <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- AdminLTE App -->
     <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
     <!-- AdminLTE for demo purposes -->
