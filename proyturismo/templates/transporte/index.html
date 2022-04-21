@@ -30,8 +30,10 @@
                         <td>{{ transporte.tipotransporte }}</td>
                         <td>{{ transporte.preciotransporte }}</td>
                         <td>{{ transporte.descripciontransporte }}</td>
-                        <td><a href=" {% url 'editartransporte' transporte.idtransporte %}" class="btn btn-primary">Editar</a>
-                        <a href=" {% url 'eliminartransporte' transporte.idtransporte %}" class="btn btn-danger">Eliminar</a></td>
+                        <td><a href=" {% url 'editartransporte' transporte.idtransporte %}" class="btn btn-primary"><i
+                            class="fa-solid fa-pen"></i></a></a>
+                        <a href=" {% url 'eliminartransporte' transporte.idtransporte %}" class="btn btn-danger"><i
+                            class="fa-solid fa-trash-can"></i></a></td>
         
                     </tr>
         
@@ -41,7 +43,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{% url 'crearcliente' %}" class="btn btn-primary" role="button">Nuevo Transporte</a>
+            <a href="{% url 'crearcliente' %}" class="btn btn-primary" role="button"><i class="fa-solid fa-plus"></i>  Nuevo Transporte</a>
         </div>
     </div>
 </div>
