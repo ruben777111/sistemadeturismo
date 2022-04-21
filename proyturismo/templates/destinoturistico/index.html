@@ -9,13 +9,15 @@
 <div class="container-fluid p-5 ">
     <div class="card">
         <div class="card-header">
-            <h2><center>Listado Destinos Turisticos</center></h2>
+            <h2>
+                <center>Listado Destinos Turisticos</center>
+            </h2>
         </div>
         <div class="card-body">
             <table id="example" class="table table-striped" style="width:100%">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Dirección</th>
@@ -26,9 +28,9 @@
                 </thead>
                 <tbody>
 
-                  {% for dest in destino %}
+                    {% for dest in destino %}
                     <tr>
-                        <td>{{ dest.iddestino }}</td>
+                        <!-- <td>{{ dest.iddestino }}</td> -->
                         <td>{{ dest.nomdestino }}</td>
                         <td>{{ dest.preciodestino }}</td>
                         <td><img src="{{ dest.multimedia.url }}" height="50"></td>
@@ -48,7 +50,8 @@
             </table>
         </div>
         <div class="card-footer">
-          <p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Nuevo Destino Turistico</a> </p> 
+            <p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button">Nuevo Destino
+                    Turistico</a> </p>
         </div>
     </div>
 </div>
