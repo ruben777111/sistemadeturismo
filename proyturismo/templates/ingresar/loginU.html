@@ -15,7 +15,7 @@
     <!-- Sweet Alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <title>Bootstrap Login Form</title>
+    <title>Iniciar Sesión</title>
 </head>
 
 <body>
@@ -31,22 +31,27 @@
                                 <path fill-rule="evenodd"
                                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
                             </svg>
-                            <h5><center>{{titulo}}</center></h5>
+                            <h5>
+                                <center>{{titulo}}</center>
+                            </h5>
                             {% if msg %}
                             <aside style="color: red;">
                                 <center>{{msg}}</center>
                             </aside>
                             {% endif %}
                             <form action="." method="POST">
-                                <input type="hidden" name = "next" value="{{ next }}">
+                                <input type="hidden" name="next" value="{{ next }}">
                                 {% csrf_token %}
                                 <!-- <input type="text" name="user" id="" class="form-control my-4 py-2"
                                     placeholder="Username" />
                                 <input type="password" name="password" id="" class="form-control my-4 py-2"
                                     placeholder="Password" /> -->
-                                
-                                {{form.username|add_class:'form-control my-4 py-2'|attr:'autocomplete:off'| attr:'placeholder:Usuario'}}
-                                {{form.password|add_class:'form-control my-4 py-2'|attr:'autocomplete:off'| attr:'placeholder:Contraseña'}}
+                                <input type="text" class="form-control my-4 py-2" name="username" autofocus="" autocapitalize="none"
+                                    autocomplete="username" maxlength="150" required="" id="id_username" placeholder="Usuario">
+                                <!-- {{form.username|add_class:'form-control my-4 py-2'|attr:'autocomplete:off'| attr:'placeholder:Usuario'}} -->
+                                <!-- {{form.password|add_class:'form-control my-4 py-2'|attr:'autocomplete:off'| attr:'placeholder:Contraseña'}} -->
+                                <input type="password" class="form-control my-4 py-2" name="password" autocomplete="current-password" required=""
+                                    id="id_password" placeholder="Contraseña">
 
                                 <div class="text-center mt-3">
                                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
@@ -55,45 +60,42 @@
                             </form>
                         </div>
 
-                        
+
 
                         <script type="text/javascript">
-                        
-                        {% if form.errors %}
-                                // var errors = '';
-                                
-                                // {% for field in form %}
-                                //     {% for error in field.errors %}
-                                //     errors += '{{ error }} \n'
-                                //     {% endfor %}
-                                // {% endfor %}
-                                    
-                                // {% for error in form.non_field_errors  %}
-                                // errors += '{{ error }} \n'
-                                // {% endfor %}
+                            {%if form.errors %}
+                            // var errors = '';
 
-                                Swal.fire({
-                                    title: "Datos Incorrectos",
-                                    text: "Ingrese los datos nuevamente",
-                                    type: "warning",
-                                    icon: 'error',
-                                    width: '39%',
-                                    // background: '#f7fff7',
-                                    allowOutsideClick: false,
-                                    confirmButton: 'Aceptar',
-                                    confirmButtonColor: '#007bff',
-                                });
+                            // {% for field in form %}
+                            //     {% for error in field.errors %}
+                            //     errors += '{{ error }} \n'
+                            //     {% endfor %}
+                            // {% endfor %}
 
-                                
+                            // {% for error in form.non_field_errors  %}
+                            // errors += '{{ error }} \n'
+                            // {% endfor %}
+
+                            Swal.fire({
+                                title: "Datos Incorrectos",
+                                text: "Ingrese los datos nuevamente",
+                                type: "warning",
+                                icon: 'error',
+                                width: '39%',
+                                // background: '#f7fff7',
+                                allowOutsideClick: false,
+                                confirmButton: 'Aceptar',
+                                confirmButtonColor: '#007bff',
+                            });
+
+
                             {% endif %}
-                            
-
                         </script>
 
-                        
-    
 
-                        
+
+
+
                     </div>
                 </div>
             </div>
@@ -104,7 +106,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
     </script>
-    
+
 </body>
 
 </html>

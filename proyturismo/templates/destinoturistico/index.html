@@ -20,6 +20,7 @@
                         <!-- <th>ID</th> -->
                         <th>Nombre</th>
                         <th>Precio</th>
+                        <th>Imagen</th>
                         <th>Dirección</th>
                         <th>Descripción</th>
                         <th>Horario</th>
@@ -37,7 +38,7 @@
                         <td>{{ dest.direcllegada }}</td>
                         <td>{{ dest.descripciondes }}</td>
                         <td>{{ dest.horario_viaje }}</td>
-                        <td><a href="{% url 'editardestinoturistico' dest.iddestino %}" class="btn btn-primary"><i
+                        <td><a href="{% url 'editardestinoturistico' dest.iddestino %}" class="btn btn-warning"><i
                                     class="fa-solid fa-pen"></i></a>
                             <a href="{% url 'eliminardestino' dest.iddestino %}" class="btn btn-danger"><i
                                     class="fa-solid fa-trash-can"></i></a>
