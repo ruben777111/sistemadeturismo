@@ -134,8 +134,9 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'boleto'
 
 # Temporizador
-SESSION_COOKIE_AGE = 1
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 3600
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
