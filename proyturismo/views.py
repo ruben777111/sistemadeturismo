@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 # Decoradores
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 # Login
 from django.contrib.auth import authenticate, login, logout
@@ -59,8 +60,8 @@ def destinoturistico(request):
 
     return render(request, 'destinoturistico/index.html', {'destino': destino})
 
-
-@login_required
+@csrf_exempt  # csrf token para enviar archivos
+@login_required  # login requerido para entrar a esta vista
 def creardestinoturistico(request):
     """request.FILES or None para recepcionar archivos"""
     formulario = destinoform(request.POST or None, request.FILES or None)
@@ -204,6 +205,7 @@ class transportecreateview(CreateView):
     template_name = 'transporte/crear.html'
     success_url = reverse_lazy('transporte')
 
+    @method_decorator(csrf_exempt)
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
