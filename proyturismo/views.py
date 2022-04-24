@@ -44,51 +44,6 @@ class LoginViewUser(LoginView):
         context['titulo'] = 'Iniciar Sesión'
         return context
 
-# class LoginViewUser2(FormView):
-#     template_name = 'ingresar/loginU.html'
-#     form_class = AuthenticationForm
-#     success_url = reverse_lazy('boleto')
-    
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.is_authenticated:
-#             return HttpResponseRedirect(self.success_url)
-#         return super().dispatch(request, *args, **kwargs,)
-    
-#     def form_valid(self, form):
-#         login(self.request, form.get_user())
-#         return HttpResponseRedirect(self.success_url)
-    
-#     def get_invalid_login_error(self):
-#         return ValidationError(
-#             self.error_messages["invalid_login"],
-#             code="invalid_login",
-#             params={"username": self.username_field.verbose_name},
-#         )
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['titulo'] = 'Iniciar Sesión'
-#         # context['msg'] = 'Usuario Incorrecto'
-#         return context
-
-
-def loginUser(request):
-    if request.method == 'POST':
-        usuario = request.POST['user']
-        contraseña = request.POST['password']
-        next_ = request.GET.get('next', 'cliente')
-        userobj = authenticate(username=usuario, password=contraseña)
-
-        if userobj != None:
-            login(request, userobj)
-            return redirect(next_)
-        else:
-            msg = 'Datos incorrectos, intente de nuevo!'
-
-    else:
-        msg = ''
-    return render(request, 'ingresar/login.html', {'msg': msg})
-
 
 def logoutuser(request):
     logout(request)

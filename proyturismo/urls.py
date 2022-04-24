@@ -5,11 +5,8 @@ from django.contrib.staticfiles.urls import static
 from proyturismo.views import *
 
 urlpatterns=[
+    # Login
     path('',LoginViewUser.as_view(), name='login'),
-    # path('', LoginViewUser2.as_view()),
-    # path('login', LoginViewUser2.as_view(), name='login'),
-    # path('',loginUser),  # Momentáneo
-    # path('login',loginUser, name='login'),
     path('logout/', logoutuser, name='logout' ),
 
     # Destinoturistico
@@ -36,8 +33,6 @@ urlpatterns=[
     path('transporte/editar/<int:pk>', transporteupdateview.as_view(), name='editartransporte'),
     path('transporte/eliminar/<int:pk>', transportedeleteview.as_view(), name='eliminartransporte'),
 
-    #Pruebas
-    path('test/', pruebas, name='prueba')
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
