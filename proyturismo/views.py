@@ -18,7 +18,7 @@ from django.forms import ValidationError
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 # Esto no sé
 from proyturismo.forms import *
-from .models import Cliente, Destinoturistico, Transporte
+from .models import Cliente, Destinoturistico, Transporte, Boleto
 
 # Create your views here.
 
@@ -94,7 +94,9 @@ def editardestinoturistico(request, id):
 
 @login_required
 def boleto(request):
-    return render(request, 'boleto/index.html')
+    ventaboleto= Boleto.objects.all();
+    return render(request, 'boleto/index.html', {'ventaboleto': ventaboleto})
+
 
 
 @login_required

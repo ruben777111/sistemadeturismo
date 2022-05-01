@@ -6,6 +6,61 @@ lista de las ventas de boletos
 
 {% block contenido %}
 contenido de las ventas de boletos
+<div class="container-fluid p-5 ">
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <center>Listado Venta de Boletos</center>
+            </h2>
+        </div>
+        <div class="card-body">
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <!-- <th>ID</th> -->
 
+
+                        
+                        <th>id boleto</th>
+                        <th>fecha viaje</th>
+                        <th>fecha emision</th>
+                        <th>tipopago</th>
+                        <th>cantidad</th>
+                        <th>precio total</th>
+                        <th>id cliente</th>
+                        <th>id destino</th>
+                        <th>id transporte</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for ven in ventaboleto %}
+                    <tr>
+                        <!-- <td>{{ dest.iddestino }}</td> -->
+                        <td>{{ ven.idboleto }}</td>
+                        <td>{{ ven.fechaviaje }}</td>
+                        <td>{{ ven.fechaemision }}</td>
+                        <td>{{ ven.tipopago }}</td>
+                        <td>{{ ven.cantidad }}</td>
+                        <td>{{ ven.preciototal }}</td>
+                        <td>{{ ven.idcliente_id  }}</td>
+                        <td>{{ ven.iddestino_id  }}</td>
+                        <td>{{ ven.idtransporte_id  }}</td>
+                        
+
+
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <p> <a href="{% url 'creardestinoturistico' %}" class="btn btn-primary" role="button"><i class="fa-solid fa-plus"></i>  Nuevo Destino
+                    Turistico</a> </p>
+        </div>
+    </div>
+</div>
 <p> <a href="{% url 'crearboletocliente' %}" class="btn btn-primary" role="button">compra de boleto ejemplo</a> </p> 
 {% endblock %}
